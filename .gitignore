@@ -1,0 +1,17 @@
+test_log
+pkg
+pkg/*
+*.log
+log
+*/log
+log/*
+*/log/*
+coverage
+.DS_Store
+*.pid
+tmp
+db/*.sqlite3
+*.output
+database.yml
+schema.rb
+public/data
