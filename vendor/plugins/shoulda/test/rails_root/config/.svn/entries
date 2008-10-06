@@ -1,0 +1,82 @@
+8
+
+dir
+145
+https://svn.mindmatters.de/travelx/platform/trunk/travelx-platform/vendor/plugins/shoulda/test/rails_root/config
+https://svn.mindmatters.de/travelx
+
+
+
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53b558f6-e855-0410-90d1-a6cd0c9ed16b
+
+routes.rb
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+a20c7a4deb4b6b5595284b8cb028366a
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+database.yml
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+2dad426e7d8d4119d87e5a312ed5086c
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+boot.rb
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+fd5eb215ca1d1e68dfd56c3f01e6b0cd
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+initializers
+dir
+
+environment.rb
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+ff393591280b7605228a8e9e84d2f280
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+environments
+dir
+

@@ -1,0 +1,124 @@
+8
+
+dir
+145
+https://svn.mindmatters.de/travelx/platform/trunk/travelx-platform/vendor/plugins/shoulda
+https://svn.mindmatters.de/travelx
+
+
+
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53b558f6-e855-0410-90d1-a6cd0c9ed16b
+
+test
+dir
+
+Rakefile
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+38ab799e66f7ecc56eb06e000fb17766
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+README.rdoc
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+49f7a02ed16eb0a9baa7aaeef740e175
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+tasks
+dir
+
+.gitignore
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+8e104f145317bf61e098d1e859a4e5d4
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+init.rb
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+d27fe269a636cced216d608485f465e4
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+lib
+dir
+
+.autotest
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+6e0b7921407f220533715328d72035d4
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+bin
+dir
+
+MIT-LICENSE
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+f24a8c507fc1addbbfc2c4b7dbefd293
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+CONTRIBUTION_GUIDELINES.rdoc
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+425c4fa8cf10f0755dc907428fa7099c
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+

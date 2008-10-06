@@ -1,0 +1,52 @@
+8
+
+dir
+145
+https://svn.mindmatters.de/travelx/platform/trunk/travelx-platform/vendor/plugins/shoulda/test/functional
+https://svn.mindmatters.de/travelx
+
+
+
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53b558f6-e855-0410-90d1-a6cd0c9ed16b
+
+users_controller_test.rb
+file
+
+
+
+
+2008-09-08T08:10:53.000000Z
+00dd22794b4309622161d585434f3105
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+posts_controller_test.rb
+file
+
+
+
+
+2008-09-08T08:10:53.000000Z
+81337e28bb311dd858b97092ed966f72
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+

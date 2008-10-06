@@ -1,0 +1,41 @@
+8
+
+dir
+145
+https://svn.mindmatters.de/travelx/platform/trunk/travelx-platform/vendor/plugins/shoulda/bin
+https://svn.mindmatters.de/travelx
+
+
+
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53b558f6-e855-0410-90d1-a6cd0c9ed16b
+
+convert_to_should_syntax
+file
+
+
+
+
+2008-09-08T08:10:54.000000Z
+63bdeb34f9e51287b2b0af358a3deff1
+2008-09-02T13:19:35.375507Z
+11
+sven.klever
+has-props
+
