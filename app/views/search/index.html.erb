@@ -1,0 +1,12 @@
+<h1>Results</h1>
+<ul>
+<%- @results.each do |result| -%>
+  <li>
+    <%= result.inspect %>
+    
+    <%= h result['from_user'] %> 
+    <strong>said</strong>
+    <span style="color:red;"><%= h result['text'] %></span>
+  </li>
+<%- end -%>
+</ul>
