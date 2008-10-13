@@ -1,12 +1,10 @@
 <h1>Results</h1>
 <ul>
-<%- @results.each do |result| -%>
+<%- @tweets.each do |tweet| -%>
   <li>
-    <%= result.inspect %>
-    
-    <%= h result['from_user'] %> 
+    <%= h tweet.user.name %> 
     <strong>said</strong>
-    <span style="color:red;"><%= h result['text'] %></span>
+    <span style="color:red;"><%= h tweet.message %></span>
   </li>
 <%- end -%>
 </ul>

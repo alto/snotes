@@ -11,7 +11,6 @@ module Snotes
         Tweet.find_or_create!(result['id'], :message => result['text'], :user_id => user.id,
           :language => result['iso_language_code'], :image_url => result['profile_image_url'])
       end
-      results # TODO: do not return results (bug in twitter-0.3.7) [thorsten, 09.10.2008]
     end
   
   end

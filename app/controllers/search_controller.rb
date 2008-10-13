@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
   
   def index
-    # @results = Twitter::Search.new(params[:query])
-    @results = Snotes::Twitter.search(params[:query])
+    Snotes::Twitter.search(params[:query])
+    @tweets = Tweet.all(:order => 'created_at DESC', :limit => 20)
   end
   
 end

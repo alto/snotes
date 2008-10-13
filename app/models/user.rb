@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20081009193919
+#
+# Table name: users
+#
+#  id         :integer(11)     not null, primary key
+#  name       :string(255)
+#  twitter_id :integer(11)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class User < ActiveRecord::Base
   
   validates_presence_of :name
