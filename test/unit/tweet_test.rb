@@ -24,5 +24,19 @@ class TweetTest < ActiveSupport::TestCase
       assert_raise(ActiveRecord::RecordInvalid) { Tweet.find_or_create!(2) }
     end
   end
+  
+  context "Creating a new tweet" do
+    should "create a tracking for it, if it's a root tweet" do
+      Tracking.delete_all
+      Factory(:tweet, :parent_id => nil)
+      assert_equal 1, Tracking.count
+    end
+    should "not create a tracking for it, if it's a child tweet" do
+      Tracking.delete_all
+      Factory(:tweet, :parent_id => 1)
+      assert_equal 0, Tracking.count
+    end
+  end
+  
 
 end

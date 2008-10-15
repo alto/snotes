@@ -10,3 +10,7 @@ Factory.define :tweet do |t|
   t.association :user
   t.message 'message'
 end
+
+def create_tracking
+  Tracking.find_by_tweet_id Factory(:tweet).id
+end

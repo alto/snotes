@@ -21,6 +21,8 @@ class Tweet < ActiveRecord::Base
   
   belongs_to :user
   
+  after_create :check_for_tracking
+  
   def self.find_or_create!(twitter_id, attributes={})
     Tweet.find_by_twitter_id(twitter_id, name) ||
     Tweet.create!(attributes.merge(:twitter_id => twitter_id))
@@ -29,5 +31,13 @@ class Tweet < ActiveRecord::Base
   def self.find_last
     find(:first, :order => 'created_at DESC')
   end
+  
+  private
+  
+    def check_for_tracking
+      if parent_id.nil?
+        Tracking.update_or_create!(self.user.name, :tweet_id => self.id)
+      end
+    end
   
 end
