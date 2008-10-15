@@ -36,7 +36,15 @@ class TweetTest < ActiveSupport::TestCase
       Factory(:tweet, :parent_id => 1)
       assert_equal 0, Tracking.count
     end
+    should "create a new note for it, if it's a root tweet" do
+      Note.expects(:create_from_tweet!)
+      Factory(:tweet, :parent_id => nil)
+    end
+    should "not create a new note for it, if it's a child tweet" do
+      Note.delete_all
+      Factory(:tweet, :parent_id => 1)
+      assert_equal 0, Note.count
+    end
   end
-  
 
 end

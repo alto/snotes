@@ -21,6 +21,7 @@ class Tweet < ActiveRecord::Base
   
   belongs_to :user
   
+  after_create :check_for_note
   after_create :check_for_tracking
   
   def self.find_or_create!(twitter_id, attributes={})
@@ -34,10 +35,16 @@ class Tweet < ActiveRecord::Base
   
   private
   
+    def check_for_note
+      if parent_id.nil?
+        Note.create_from_tweet!(self)
+      end
+    end
+
     def check_for_tracking
       if parent_id.nil?
         Tracking.update_or_create!(self.user.name, :tweet_id => self.id)
       end
     end
-  
+
 end
