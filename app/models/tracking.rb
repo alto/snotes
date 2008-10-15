@@ -6,6 +6,11 @@ class Tracking < ActiveRecord::Base
 
   belongs_to :tweet
 
+  # def conduct
+  #   tweets = Snotes::Twitter.track(twitter_name)
+  #   # what to do with the new tweets?
+  # end
+
   def self.update_or_create!(twitter_name, attributes={})
     if tracking = find_by_twitter_name(twitter_name)
       tracking.update_attributes(attributes)
