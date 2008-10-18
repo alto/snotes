@@ -18,10 +18,19 @@ class Tracking < ActiveRecord::Base
 
   belongs_to :tweet
 
+  def last_twitter_id
+    find_options = {
+      :conditions => ['id = :parent_id OR parent_id = :parent_id', {:parent_id => tweet_id}],
+      :order => 'created_at DESC',
+    }
+    last_tweet = Tweet.first(find_options)
+    last_tweet.twitter_id
+  end
+
   def self.conduct
     tweets = []
     Tracking.all.each do |tracking| 
-      tweets << Snotes::Twitter.track(tracking.twitter_name, tracking.tweet.twitter_id)
+      tweets << Snotes::Twitter.track(tracking.twitter_name, tracking.last_twitter_id)
     end
     tweets.flatten
   end

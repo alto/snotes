@@ -12,6 +12,23 @@ class TrackingTest < ActiveSupport::TestCase
     should_belong_to :tweet
   end
 
+  context "A tracking last tweet's twitter id" do
+    setup do
+      @parent = Factory(:tweet, :twitter_id => 13, :created_at => 1.day.ago)
+      @tracking = create_tracking(@parent)
+    end
+
+    should "be the parent tweet's twitter id if there is no child" do
+      assert_equal 13, @tracking.last_twitter_id
+    end
+    should "be the youngest childs twitter id" do
+      teen = Factory(:tweet, :twitter_id => 14, :parent_id => @parent.id, :created_at => 1.hour.ago)
+      baby = Factory(:tweet, :twitter_id => 17, :parent_id => @parent.id)
+      assert_equal 17, @tracking.last_twitter_id
+    end
+  end
+  
+
   context "Updating or creating a tracking" do
     should "return the tracking if it exists" do
       tracking = create_tracking
