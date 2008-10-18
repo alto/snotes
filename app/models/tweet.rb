@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20081009193919
+# Schema version: 20081015220358
 #
 # Table name: tweets
 #
@@ -11,6 +11,7 @@
 #  image_url  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  parent_id  :integer(11)
 #
 
 class Tweet < ActiveRecord::Base

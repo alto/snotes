@@ -24,6 +24,21 @@ class TwitterTest < ActiveSupport::TestCase
       assert_equal 'de', tweet.language
     end
   end
+  
+  context "Tracking twitter" do
+    setup do
+      ::Twitter::Search.any_instance.expects(:since).returns(mock_results)
+      @tweet = Factory(:tweet)
+      @user = @tweet.user
+    end
+
+    should "create a child tweet" do
+      Snotes::Twitter.track(@user.name, @tweet.id)
+      assert_not_nil child_tweet = Tweet.find_by_parent_id(@tweet.id)
+      assert_equal 944702192, child_tweet.twitter_id
+    end
+  end
+  
 
   def mock_results
     [{ "text" => "@actionJackson_ Viel Erfolg! :-)", 

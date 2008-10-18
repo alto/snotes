@@ -27,5 +27,17 @@ class TrackingTest < ActiveSupport::TestCase
       assert_raise(ActiveRecord::RecordInvalid) { Tracking.update_or_create!('twitterer') }
     end
   end
+  
+  context "Conducting trackings" do
+    setup do
+      @tweet = Factory(:tweet)
+      @tracking = create_tracking(@tweet)
+    end
+    
+    should "iterate over trackings and start a twitter track" do
+      Snotes::Twitter.expects(:track).with(@tracking.twitter_name, @tweet.twitter_id).returns(@tweet)
+      assert_equal [@tweet], Tracking.conduct
+    end
+  end
 
 end

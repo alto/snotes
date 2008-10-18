@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20081015220358
+#
+# Table name: trackings
+#
+#  id           :integer(11)     not null, primary key
+#  tweet_id     :integer(11)
+#  twitter_name :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Tracking < ActiveRecord::Base
 
   validates_presence_of :tweet_id
@@ -6,10 +18,13 @@ class Tracking < ActiveRecord::Base
 
   belongs_to :tweet
 
-  # def conduct
-  #   tweets = Snotes::Twitter.track(twitter_name)
-  #   # what to do with the new tweets?
-  # end
+  def self.conduct
+    tweets = []
+    Tracking.all.each do |tracking| 
+      tweets << Snotes::Twitter.track(tracking.twitter_name, tracking.tweet.twitter_id)
+    end
+    tweets.flatten
+  end
 
   def self.update_or_create!(twitter_name, attributes={})
     if tracking = find_by_twitter_name(twitter_name)

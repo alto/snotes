@@ -11,6 +11,7 @@ Factory.define :tweet do |t|
   t.message 'message'
 end
 
-def create_tracking
-  Tracking.find_by_tweet_id Factory(:tweet).id
+def create_tracking(tweet=nil)
+  tweet ||= Factory(:tweet).id
+  Tracking.find_by_tweet_id tweet
 end
