@@ -1,0 +1,10 @@
+<h1>Results</h1>
+<ul>
+<%- @tweets.each do |tweet| -%>
+  <li>
+    <%= h tweet.user.name %> 
+    <strong>said</strong>
+    <span style="color:red;"><%= h tweet.message %></span>
+  </li>
+<%- end -%>
+</ul>
