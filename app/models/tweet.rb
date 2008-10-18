@@ -34,11 +34,17 @@ class Tweet < ActiveRecord::Base
     find(:first, :order => 'created_at DESC')
   end
   
+  def parent?
+    parent_id.nil?
+  end
+  
   private
   
     def check_for_note
-      if parent_id.nil?
+      if parent?
         Note.create_from_tweet!(self)
+      elsif !message.strip.match(/\+$/) # ends on +
+        Note.find_by_tweet_id(parent_id).update_attribute(:finished_at, Time.now)
       end
     end
 

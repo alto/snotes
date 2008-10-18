@@ -32,8 +32,9 @@ class TweetTest < ActiveSupport::TestCase
       assert_equal 1, Tracking.count
     end
     should "not create a tracking for it, if it's a child tweet" do
+      parent = Factory(:tweet)
       Tracking.delete_all
-      Factory(:tweet, :parent_id => 1)
+      Factory(:tweet, :parent_id => parent.id)
       assert_equal 0, Tracking.count
     end
     should "create a new note for it, if it's a root tweet" do
@@ -41,9 +42,22 @@ class TweetTest < ActiveSupport::TestCase
       Factory(:tweet, :parent_id => nil)
     end
     should "not create a new note for it, if it's a child tweet" do
-      Note.delete_all
-      Factory(:tweet, :parent_id => 1)
-      assert_equal 0, Note.count
+      parent = Factory(:tweet)
+      count = Note.count
+      Factory(:tweet, :parent_id => parent.id)
+      assert_equal count, Note.count
+    end
+    should "finished the parent note, if it's a child tweet without the matt operator" do
+      parent = Factory(:tweet)
+      Factory(:tweet, :parent_id => parent.id, :message => 'finished')
+      note = Note.find_by_tweet_id(parent.id)
+      assert_not_nil note.finished_at
+    end
+    should "not finished the parent note, if it's a child tweet with the matt operator" do
+      parent = Factory(:tweet)
+      Factory(:tweet, :parent_id => parent.id, :message => 'finished + ')
+      note = Note.find_by_tweet_id(parent.id)
+      assert_nil note.finished_at
     end
   end
 
