@@ -1,14 +1,15 @@
 # == Schema Information
-# Schema version: 20081015220358
+# Schema version: 20081018190012
 #
 # Table name: notes
 #
-#  id         :integer(11)     not null, primary key
-#  tweet_id   :integer(11)
-#  header     :string(255)
-#  url        :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer(11)     not null, primary key
+#  tweet_id    :integer(11)
+#  header      :string(255)
+#  url         :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  finished_at :datetime
 #
 
 class Note < ActiveRecord::Base
