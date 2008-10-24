@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
+
 class TwitterTest < ActiveSupport::TestCase
 
   context "Searching twitter" do
@@ -24,7 +25,6 @@ class TwitterTest < ActiveSupport::TestCase
       assert_equal 'de', tweet.language
     end
   end
-  
 
   def mock_results
     [{ "text" => "@actionJackson_ Viel Erfolg! :-)", 
@@ -38,5 +38,4 @@ class TwitterTest < ActiveSupport::TestCase
       "profile_image_url" => "http://s3.amazonaws.com/twitter_production/profile_images/54854287/next2_small_normal.gif"
     }]
   end
-
 end
