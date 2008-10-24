@@ -1,6 +1,6 @@
 class Snotes::Twitter
 
-  def self.search(query)
+  def self.search(query='#snote')
     tweets = []
     results = ::Twitter::Search.new(query)
     if last_tweet = Tweet.find_last
