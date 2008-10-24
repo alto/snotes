@@ -22,4 +22,4 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 # required test gems
-config.gem "thoughtbot-factory_girl", :lib => “factory_girl”, :source => “http://gems.github.com”, :version => '1.1.3'
+config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com", :version => '>=1.1.2'
