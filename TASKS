@@ -1,7 +1,7 @@
+# add auto-follow feature
+# use @snote instead of #snote
+# introduce #start and #stop hashtags
+# introduce a daemon to track new note tweets
 
-## list finished notes
 ## show note
 ## post snote tweet
-## daemon: search
-## daemon: conduct trackings
-## daemon: finish old and open trackings
