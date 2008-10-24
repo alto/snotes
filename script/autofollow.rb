@@ -19,7 +19,7 @@ to_follow.each do |f|
   puts "following #{f.screen_name}"
   User.find_or_create!(f.id, :name => f.screen_name)
   begin
-    twitter.follow(f.id)
+    twitter.create_friendship(f.id)
   rescue Twitter::CantConnect
     puts "`-> didn't work, why? I don't know"
   end
