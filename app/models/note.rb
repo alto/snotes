@@ -20,7 +20,7 @@ class Note < ActiveRecord::Base
   belongs_to :tweet
   
   def self.create_from_tweet!(tweet)
-    message_without_snote = tweet.message.gsub(/#{SNOTE_TAG}/,'').strip
+    message_without_snote = tweet.message.gsub(/#{Snotes::Twitter::SNOTE_TAG}/,'').strip
   
     if message_without_snote =~ /(.*) (http:\/\/.*)( .*)/ # TODO refine this [thorsten, 2008-10-16]
       header = "#{$1}#{$3}"
