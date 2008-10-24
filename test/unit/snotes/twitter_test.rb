@@ -4,7 +4,7 @@ class TwitterTest < ActiveSupport::TestCase
 
   context "Searching twitter" do
     setup do
-      ::Twitter::Search.expects(:new).with('query').returns(mock_results)
+      ::Twitter::Search.any_instance.expects(:to).with('query').returns(mock_results)
     end
     should "create a user" do
       User.delete_all
@@ -22,20 +22,6 @@ class TwitterTest < ActiveSupport::TestCase
       assert_equal 944702192, tweet.twitter_id
       assert_equal "http://s3.amazonaws.com/twitter_production/profile_images/54854287/next2_small_normal.gif", tweet.image_url
       assert_equal 'de', tweet.language
-    end
-  end
-  
-  context "Tracking twitter" do
-    setup do
-      ::Twitter::Search.any_instance.expects(:since).returns(mock_results)
-      @tweet = Factory(:tweet)
-      @user = @tweet.user
-    end
-
-    should "create a child tweet" do
-      Snotes::Twitter.track(@user.name, @tweet.id)
-      assert_not_nil child_tweet = Tweet.find_by_parent_id(@tweet.id)
-      assert_equal 944702192, child_tweet.twitter_id
     end
   end
   

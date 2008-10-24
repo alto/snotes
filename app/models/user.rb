@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     User.create!(attributes.merge(:twitter_id => twitter_id))
   end
   
+  def note
+    Note.first(:conditions => ['tweet_id IN (SELECT id FROM tweets WHERE user_id = ?)', id])
+  end
+  
 end
