@@ -7,6 +7,7 @@ class TweetTest < ActiveSupport::TestCase
     should_require_attributes :user_id
     should_require_attributes :message
     should_belong_to :user
+    should_have_many :children
   end
 
   context "Finding or creating a tweet" do
