@@ -18,6 +18,7 @@ class Snotes::Twitter
   
   def self.track(name, tweet_id)
     tweets = []
+    # puts "Searching Twitter from(#{name}) since(#{tweet_id})"
     results = ::Twitter::Search.new.from(name).since(tweet_id)
     results.each do |result|
       if result != 'results'

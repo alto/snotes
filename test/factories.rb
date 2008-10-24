@@ -11,6 +11,11 @@ Factory.define :tweet do |t|
   t.message 'message'
 end
 
+Factory.define :note do |n|
+  n.association :tweet
+  n.header 'header'
+end
+
 def create_tracking(tweet=nil)
   tweet ||= Factory(:tweet).id
   Tracking.find_by_tweet_id tweet

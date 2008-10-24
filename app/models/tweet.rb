@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20081015220358
+# Schema version: 20081018190012
 #
 # Table name: tweets
 #
@@ -21,6 +21,7 @@ class Tweet < ActiveRecord::Base
   validates_presence_of :message
   
   belongs_to :user
+  has_many :children, :class_name => "Tweet", :foreign_key => "parent_id"
   
   after_create :check_for_note
   after_create :check_for_tracking
