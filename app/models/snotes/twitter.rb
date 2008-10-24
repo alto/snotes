@@ -1,12 +1,12 @@
 class Snotes::Twitter
 
   def self.do_your_job
-    tweets = do_search(SNOTE_TAG)
+    tweets = search(SNOTE_TAG)
   end
 
   def self.search(query)
     results = ::Twitter::Search.new.to(query)
-    if last_tweet = Tweet.find_last
+    if last_tweet = Tweet.find(:first, :order => 'created_at DESC')
       results = results.since(last_tweet.twitter_id)
     end
     results.collect do |result|

@@ -31,10 +31,6 @@ class Tweet < ActiveRecord::Base
     Tweet.create!(attributes.merge(:twitter_id => twitter_id))
   end
   
-  def self.find_last
-    find(:first, :order => 'created_at DESC')
-  end
-  
   private
   
     def check_for_note

@@ -1,0 +1,4 @@
+---
+  # add the snote twitter account credentials here and copy them to config/twitter.yml
+username: foobar
+password: doobar
