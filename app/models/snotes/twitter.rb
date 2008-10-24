@@ -1,4 +1,5 @@
 class Snotes::Twitter
+  SNOTE_TAG = '@snote'
 
   def self.do_your_job
     tweets = search(SNOTE_TAG)
