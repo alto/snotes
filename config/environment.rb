@@ -68,3 +68,4 @@ end
 
 require 'twitter'
 
+SNOTE_TAG = '@snote'
