@@ -1,3 +1,7 @@
+[24.10.2008]
+
+- autofollow-Script. twitter user config in config/twitter.yml
+
 [2008-10-13]
 - starting Twitter search from last tweet upwards
 
@@ -8,4 +12,3 @@
 [2008-10-18]
 - may conduct the trackings and read follow-tweets (extend notes)
 - may finish a note
-

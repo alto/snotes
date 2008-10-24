@@ -67,4 +67,3 @@ Rails::Initializer.run do |config|
 end
 
 require 'twitter'
-
