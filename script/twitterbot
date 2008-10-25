@@ -16,8 +16,8 @@ options = {
 
 Daemons.run_proc("twitterbot", options) do
   loop do
-    Snotes::Twitter.search
+    Snotes::Twitter.search("snote")
     Snotes::Twitter.autofollow
-    sleep(300)
+    sleep(60)
   end
 end

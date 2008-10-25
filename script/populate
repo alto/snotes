@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+
+require 'logger'
+RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
+RAILS_DEFAULT_LOGGER.level = Logger::INFO
+
+require File.dirname(__FILE__) + '/../config/boot'
+require File.dirname(__FILE__) + '/../config/environment'
+
+require 'populator'
+
+def nil_or_date(days_in_the_past = 100)
+  rand(20) % 20 == 0 ? DateTime.now - rand(days_in_the_past).days : nil
+end
+
+
+# Table name: users
+#
+#  id         :integer(11)     not null, primary key
+#  name       :string(255)
+#  twitter_id :integer(11)
+#  created_at :datetime
+#  updated_at :datetime
+User.populate(50) do |user|
+  user.name = Faker::Name.name
+  user.twitter_id = rand(99999999)
+end
+
+
+
+# Table name: notes
+#
+#  id          :integer(11)     not null, primary key
+#  tweet_id    :integer(11)
+#  header      :string(255)
+#  url         :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  finished_at :datetime
+Note.populate(200) do |note|
+  note.header = Faker::Lorem.sentence
+  note.url = Faker::Internet.domain_name
+  note.finished_at = nil_or_date
+  # note.user_id = User.first(:order => "RAND()")
+end
+
+
+# Table name: tweets
+#
+#  id         :integer(11)     not null, primary key
+#  user_id    :integer(11)
+#  twitter_id :integer(11)
+#  message    :text
+#  language   :string(255)
+#  image_url  :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  parent_id  :integer(11)
+Tweet.populate(3000) do |tweet|
+  tweet.user_id = User.first(:order => "RAND()")
+  tweet.twitter_id = rand(99999999)
+  tweet.message = Faker::Lorem.sentence(rand(10))
+  tweet.language = ['de', 'en', 'jp', 'ca', 'fr'].rand
+  tweet.image_url = [
+                      "http://s3.amazonaws.com/twitter_production/profile_images/57793787/Sam_Ghost2_normal.JPG",
+                      "http://s3.amazonaws.com/twitter_production/profile_images/51629589/twittercrow1_normal.jpg",
+                      "http://s3.amazonaws.com/twitter_production/profile_images/60718414/apple-automator-robot_normal.png",
+                      "http://s3.amazonaws.com/twitter_production/profile_images/60680085/m_9672904b8d6b75c85278f32e216d4f6f_normal.jpg"
+                    ].rand
+  # tweet.note_id = Note.first(:order => "RAND()")
+end
