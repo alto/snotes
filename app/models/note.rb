@@ -14,13 +14,12 @@
 
 class Note < ActiveRecord::Base
   
-  validates_presence_of :tweet_id
   validates_presence_of :header
   
-  belongs_to :tweet
+  has_many :tweets, :order => 'created_at ASC'
   
-  def self.create_from_tweet!(tweet)
-    message_without_snote = tweet.message.gsub(/#{Snotes::Twitter::SNOTE_TAG}/,'').strip
+  def self.create_from_message!(message)
+    message_without_snote = message.gsub(/#{Snotes::Twitter::SNOTE_TAG}/,'').gsub(/#start/,'').strip
   
     if message_without_snote =~ /(.*) (http:\/\/.*)( .*)/ # TODO refine this [thorsten, 2008-10-16]
       header = "#{$1}#{$3}"
@@ -29,7 +28,7 @@ class Note < ActiveRecord::Base
       header = message_without_snote
       url = nil
     end
-    create!(:tweet_id => tweet.id, :header => header, :url => url)
+    create!(:header => header, :url => url)
   end
   
 end

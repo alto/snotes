@@ -2,7 +2,9 @@
 
 <%- @notes.each do |note| -%>
   <h2><%= h note.header %></h2>
-  <strong>by: <%= link_to_twitter(note.tweet.user.name) %></strong>
+  <%- if tweet = note.tweets.first -%>
+  <strong>by: <%= link_to_twitter(tweet.user.name) %></strong>
+  <%- end -%>
   <%- unless note.url.blank? -%>
     <p>link: <%= link_to note.url, note.url %></p>
   <%- end -%>

@@ -18,7 +18,7 @@ class TwitterTest < ActiveSupport::TestCase
       Tweet.delete_all
       Snotes::Twitter.search('query')
       tweet = Tweet.first
-      assert_equal '@actionJackson_ Viel Erfolg! :-)', tweet.message
+      assert_equal '@actionJackson_ #start Viel Erfolg! :-)', tweet.message
       assert_equal 'enebo', tweet.user.name
       assert_equal 944702192, tweet.twitter_id
       assert_equal "http://s3.amazonaws.com/twitter_production/profile_images/54854287/next2_small_normal.gif", tweet.image_url
@@ -27,7 +27,7 @@ class TwitterTest < ActiveSupport::TestCase
   end
 
   def mock_results
-    [{ "text" => "@actionJackson_ Viel Erfolg! :-)", 
+    [{ "text" => "@actionJackson_ #start Viel Erfolg! :-)", 
       "from_user" => "enebo", 
       "to_user" => "actionJackson_", 
       "to_user_id" => 588377, 

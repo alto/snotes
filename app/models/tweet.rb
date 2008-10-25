@@ -18,12 +18,14 @@ class Tweet < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :twitter_id
   validates_presence_of :message
+  validates_presence_of :note_id
   
   belongs_to :user
+  belongs_to :note
   
-  after_create :check_for_note
+  before_validation :check_for_note
   
-  delegate :note, :to => :user
+  # delegate :note, :to => :user
   
   def self.find_or_create!(twitter_id, attributes={})
     Tweet.find_by_twitter_id(twitter_id, name) ||
@@ -34,8 +36,9 @@ class Tweet < ActiveRecord::Base
   
     def check_for_note
       if message =~ /#start/
-        Note.create_from_tweet!(self)
-      else
+        self.note = Note.create_from_message!(message)
+      elsif user
+        self.note = user.note
         if message =~ /#stop/
           note.update_attribute(:finished_at, Time.now)
         end

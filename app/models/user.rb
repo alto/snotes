@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   def note
-    Note.first(:conditions => ['tweet_id IN (SELECT id FROM tweets WHERE user_id = ?)', id])
+    Note.first(:conditions => ['id IN (SELECT note_id FROM tweets WHERE user_id = ?)', id])
   end
   
 end
