@@ -3,6 +3,7 @@ class Snotes::Twitter
 
   class << self
     def search(query=SNOTE_TAG)
+      logger.info "starting search for #{query}"
       results = ::Twitter::Search.new.to(query)
       if last_tweet = Tweet.find(:first, :order => 'created_at DESC')
         results = results.since(last_tweet.twitter_id)
@@ -17,8 +18,10 @@ class Snotes::Twitter
     end
     
     def autofollow
+      logger.info 'starting autofollow'
       twitter = Twitter::Base.new(TWITTER_CONFIG['username'], TWITTER_CONFIG['password'])
       to_follow = twitter.followers.select do |u| 
+        logger.info "to_follow(#{u.screen_name})"
         !twitter.friends.map{|f| f.screen_name }.include?(u.screen_name)
       end
 
@@ -30,6 +33,7 @@ class Snotes::Twitter
           logger.error("-> didn't work, why? I don't know")
         end
       end
+      logger.info "finished autofollow"
     end
     
     def logger
