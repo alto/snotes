@@ -1,4 +1,3 @@
-# switch associations: tweet belongs_to note has_many tweets
 
 ## show note
 ## post snote tweet
