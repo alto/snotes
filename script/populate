@@ -18,10 +18,13 @@ end
 #  twitter_id :integer(11)
 #  created_at :datetime
 #  updated_at :datetime
+puts "Users are populating your db..."
 User.populate(50) do |user|
   user.name = Faker::Name.name
   user.twitter_id = rand(99999999)
 end
+
+
 
 
 
@@ -34,11 +37,11 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #  finished_at :datetime
+puts "Notes are taking place..."
 Note.populate(200) do |note|
   note.header = Faker::Lorem.sentence
   note.url = Faker::Internet.domain_name
   note.finished_at = nil_or_date
-  note.user_id = User.first(:order => "RAND()")
 end
 
 
@@ -53,6 +56,7 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  parent_id  :integer(11)
+puts "And finally the tweets are hopping in..."
 Tweet.populate(3000) do |tweet|
   tweet.user_id = User.first(:order => "RAND()")
   tweet.twitter_id = rand(99999999)
