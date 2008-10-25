@@ -20,7 +20,7 @@ end
 #  updated_at :datetime
 puts "Users are populating your db..."
 User.populate(50) do |user|
-  user.name = Faker::Name.name
+  user.name = Faker::Name.first_name
   user.twitter_id = rand(99999999)
 end
 
