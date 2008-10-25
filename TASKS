@@ -1,6 +1,4 @@
 # switch associations: tweet belongs_to note has_many tweets
 
-# introduce #start and #stop hashtags
-
 ## show note
 ## post snote tweet
