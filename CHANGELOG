@@ -15,3 +15,9 @@
 
 [2008-10-24]
 - may list notes
+- using @snote instead of #snote
+- introduced #start and #stop hashtags
+- auto-follow
+- introduced daemons for searching tweets and auto-follow
+
+[2008-10-25]

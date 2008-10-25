@@ -6,8 +6,8 @@
   <%- unless note.url.blank? -%>
     <p>link: <%= link_to note.url, note.url %></p>
   <%- end -%>
-  <%- note.tweet.children.each do |tweet| -%>
-    <p><%= message(tweet.message) %></p>
-  <%- end -%>
+  <%#- note.tweet.children.each do |tweet| -%>
+    <p><%#= message(tweet.message) %></p>
+  <%#- end -%>
 <%- end -%>
 

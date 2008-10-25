@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+require 'logger'
+RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
+RAILS_DEFAULT_LOGGER.level = Logger::INFO
+
+require File.dirname(__FILE__) + '/../config/boot'
+require File.dirname(__FILE__) + '/../config/environment'
+
+options = {
+  :dir_mode => :normal,
+  :dir => "#{RAILS_ROOT}/log",
+  :backtrace  => true,
+  :log_output => true,
+  :monitor    => true
+}
+
+Daemons.run_proc("twitterbot", options) do
+  loop do
+    Snotes::Twitter.search
+    Snotes::Twitter.autofollow
+    sleep(300)
+  end
+end

@@ -1,7 +1,4 @@
-# add auto-follow feature
-# use @snote instead of #snote
-# introduce #start and #stop hashtags
-# introduce a daemon to track new note tweets
+# switch associations: tweet belongs_to note has_many tweets
 
 ## show note
 ## post snote tweet

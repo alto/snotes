@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20081018190012
+# Schema version: 20081024210037
 #
 # Table name: tweets
 #
@@ -11,7 +11,6 @@
 #  image_url  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  parent_id  :integer(11)
 #
 
 class Tweet < ActiveRecord::Base
@@ -21,37 +20,25 @@ class Tweet < ActiveRecord::Base
   validates_presence_of :message
   
   belongs_to :user
-  has_many :children, :class_name => "Tweet", :foreign_key => "parent_id"
   
   after_create :check_for_note
-  after_create :check_for_tracking
+  
+  delegate :note, :to => :user
   
   def self.find_or_create!(twitter_id, attributes={})
     Tweet.find_by_twitter_id(twitter_id, name) ||
     Tweet.create!(attributes.merge(:twitter_id => twitter_id))
   end
   
-  def self.find_last
-    find(:first, :order => 'created_at DESC')
-  end
-  
-  def parent?
-    parent_id.nil?
-  end
-  
   private
   
     def check_for_note
-      if parent?
+      if message =~ /#start/
         Note.create_from_tweet!(self)
-      elsif !message.strip.match(/\+$/) # ends on +
-        Note.find_by_tweet_id(parent_id).update_attribute(:finished_at, Time.now)
-      end
-    end
-
-    def check_for_tracking
-      if parent_id.nil?
-        Tracking.update_or_create!(self.user.name, :tweet_id => self.id)
+      else
+        if message =~ /#stop/
+          note.update_attribute(:finished_at, Time.now)
+        end
       end
     end
 
