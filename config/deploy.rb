@@ -56,4 +56,5 @@ end
 desc "setting additional symlinks"
 task :set_symlinks do
   run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  run "cp #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
 end
