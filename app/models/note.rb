@@ -1,10 +1,9 @@
 # == Schema Information
-# Schema version: 20081024210037
+# Schema version: 20081025192252
 #
 # Table name: notes
 #
 #  id          :integer(11)     not null, primary key
-#  tweet_id    :integer(11)
 #  header      :string(255)
 #  url         :string(255)
 #  created_at  :datetime
