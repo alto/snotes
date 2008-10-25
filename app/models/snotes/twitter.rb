@@ -9,6 +9,7 @@ class Snotes::Twitter
         results = results.since(last_tweet.twitter_id)
       end
       results.collect do |result|
+        logger.info "result: #{result.inspect}"
         if result != 'results'
           user = User.find_or_create!(result['from_user_id'], :name => result['from_user'])
           Tweet.find_or_create!(result['id'], :message => result['text'], :user_id => user.id,
@@ -34,6 +35,8 @@ class Snotes::Twitter
         end
       end
       logger.info "finished autofollow"
+    rescue Twitter::CantConnect
+      logger.error("twitter api")
     end
     
     def logger
