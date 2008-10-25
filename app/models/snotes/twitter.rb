@@ -13,20 +13,14 @@ class Snotes::Twitter
           Tweet.find_or_create!(result['id'], :message => result['text'], :user_id => user.id,
             :language => result['iso_language_code'], :image_url => result['profile_image_url'])
         end
-        results.collect do |result|
-          if result != 'results'
-            user = User.find_or_create!(result['from_user_id'], :name => result['from_user'])
-            Tweet.find_or_create!(result['id'], :message => result['text'], :user_id => user.id,
-              :language => result['iso_language_code'], :image_url => result['profile_image_url'])
-          end
-        end.compact
-      end
+      end.compact
     end
     
     def autofollow
       twitter = Twitter::Base.new(TWITTER_CONFIG['username'], TWITTER_CONFIG['password'])
-
-      to_follow = twitter.followers.select {|u| !twitter.friends.map{|f| f.screen_name }.include?(u.screen_name)}
+      to_follow = twitter.followers.select do |u| 
+        !twitter.friends.map{|f| f.screen_name }.include?(u.screen_name)
+      end
 
       to_follow.each do |f|
         User.find_or_create!(f.id, :name => f.screen_name)
