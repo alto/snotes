@@ -1,12 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'logger'
-RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
-RAILS_DEFAULT_LOGGER.level = Logger::INFO
-
 require File.dirname(__FILE__) + '/../config/boot'
 require File.dirname(__FILE__) + '/../config/environment'
 
+require 'faker'
 require 'populator'
 
 def nil_or_date(days_in_the_past = 100)
@@ -41,7 +38,7 @@ Note.populate(200) do |note|
   note.header = Faker::Lorem.sentence
   note.url = Faker::Internet.domain_name
   note.finished_at = nil_or_date
-  # note.user_id = User.first(:order => "RAND()")
+  note.user_id = User.first(:order => "RAND()")
 end
 
 
@@ -67,5 +64,5 @@ Tweet.populate(3000) do |tweet|
                       "http://s3.amazonaws.com/twitter_production/profile_images/60718414/apple-automator-robot_normal.png",
                       "http://s3.amazonaws.com/twitter_production/profile_images/60680085/m_9672904b8d6b75c85278f32e216d4f6f_normal.jpg"
                     ].rand
-  # tweet.note_id = Note.first(:order => "RAND()")
+  tweet.note_id = Note.first(:order => "RAND()")
 end
