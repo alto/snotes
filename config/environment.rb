@@ -24,6 +24,8 @@ Rails::Initializer.run do |config|
   # They can then be installed with "rake gems:install" on new installations.
   config.gem "twitter", :version => '0.3.7'
   config.gem "daemons", :version => '1.0.10'
+  config.gem "faker", :version => '0.3.1'
+  config.gem "populator", :version => '0.2.5'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
