@@ -1,6 +1,6 @@
 set :user, 'mongrel'
 
-set :rails_env, 'staging'
+# set :rails_env, 'production'
 
 set :deploy_to, "/home/mongrel/railsapps/#{application}"
 

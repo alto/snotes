@@ -16,3 +16,4 @@ database.yml
 schema.rb
 public/data
 config/twitter.yml
+.rsync_cache
