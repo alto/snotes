@@ -1,60 +1,36 @@
-require 'palmtree/recipes/mongrel_cluster'
+set :application, 'snotes'
 
-set :application, "snotes"
+set :stages, %w(production)
+set :default_stage, 'production'
 
-set :deploy_via, :copy
-#set :copy_cache, true
-set :repository, "file://."
+require 'capistrano/ext/multistage'
 
-
-set :deploy_to, "/home/mongrel/railsapps/#{application}"
-
+# scm config
 set :scm, :git
+set :repository, 'git://github.com/alto/snotes.git'
+set :branch, 'master'
+set :deploy_via, :rsync_with_remote_cache
 
-set :user, 'mongrel'
-
-role :app, "rubymatters.de"
-role :web, "rubymatters.de"
-role :db,  "rubymatters.de", :primary => true
-
+# system config
 set :use_sudo, false
 
-set :mongrel_conf, "#{shared_path}/config/mongrel_cluster.yml"
-set :mongrel_user, 'mongrel'
-set :mongrel_group, 'mongrel'
-
-set :mongrel_port, '9000'
-set :mongrel_servers, '2'
-set :mongrel_address, '127.0.0.1'
-set :mongrel_environment, 'production'
-
-set :mongrel_pid, "#{shared_path}/log/mongrel_cluster.#{application}.pid"
-
-
-after 'deploy:setup', :setup_mongrel_conf
 after 'deploy:update_code', :set_symlinks
+after 'deploy', 'deploy:cleanup'
 
-desc "setting up mongrel"
-task :setup_mongrel_conf do
-  mongrel_configuration = <<EOF
----
-port: 11000
-pid_file: #{mongrel_pid}
-servers: #{mongrel_servers}
-address: #{mongrel_address}
-cwd: #{deploy_to}/current
-environment: #{mongrel_environment}
-EOF
-
-  run "mkdir -p #{shared_path}/config"
-  put mongrel_configuration, mongrel_conf
-
+task :set_symlinks do
+  run "ln -f -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  run "ln -f -s #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
 end
 
+# Passenger specific restart
+namespace :deploy do
+  desc 'Restarting mod_rails with restart.txt'
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
 
-
-desc "setting additional symlinks"
-task :set_symlinks do
-  run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  run "cp #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
+  [:start, :stop].each do |t|
+    desc "#{t} task is a no-op with mod_rails"
+    task t, :roles => :app do ; end
+  end
 end
